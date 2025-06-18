@@ -76,7 +76,8 @@ function updateDisplay() {
   updateStats();
   updateAdCampaignsDisplay();
   updatePRDisasterDisplay();
-  updateCheatMenu(false); // Don't overwrite the cheat menu input fields while typing
+  // Do not call updateCheatMenu with true, so cheat menu inputs are not overwritten on every tick
+  updateCheatMenu(false);
 }
 
 function makeBreadcoin() {
@@ -101,6 +102,47 @@ function buyMarketing() {
   } else {
     log("Not enough Breadcoins for marketing.");
   }
+}
+
+function buyToaster() {
+  if (breadcoins >= toasterCost) {
+    breadcoins -= toasterCost;
+    toasters++;
+    toasterCost = Math.floor(toasterCost * 1.3);
+    log("Toaster purchased.");
+    if (toasters === 10) log("You've reached 10 toasters — crispy empire begins.");
+    updateDisplay();
+  } else log("Not enough Breadcoins for a toaster.");
+}
+
+function buyFactory() {
+  if (breadcoins >= factoryCost) {
+    breadcoins -= factoryCost;
+    factories++;
+    factoryCost = Math.floor(factoryCost * 1.5);
+    log("Factory constructed.");
+    updateDisplay();
+  } else log("Not enough Breadcoins for a factory.");
+}
+
+function upgradeToasters() {
+  if (breadcoins >= toasterUpgradeCost) {
+    breadcoins -= toasterUpgradeCost;
+    toasterLevel++;
+    toasterUpgradeCost = Math.floor(toasterUpgradeCost * 1.75);
+    log(`Toasters upgraded to level ${toasterLevel}.`);
+    updateDisplay();
+  } else log("Not enough Breadcoins to upgrade toasters.");
+}
+
+function upgradeFactories() {
+  if (breadcoins >= factoryUpgradeCost) {
+    breadcoins -= factoryUpgradeCost;
+    factoryLevel++;
+    factoryUpgradeCost = Math.floor(factoryUpgradeCost * 2);
+    log(`Factories upgraded to level ${factoryLevel}.`);
+    updateDisplay();
+  } else log("Not enough Breadcoins to upgrade factories.");
 }
 
 // Buy Ad Campaign
@@ -394,7 +436,7 @@ function updateCheatMenu(forceSyncInputs = false) {
     cheatDiv.className = "store";
     cheatDiv.id = "cheatDiv";
     cheatDiv.innerHTML = `
-      <h3>🕹️ Cheat Menu</h3>
+      <h3>🕹️ Cheat Menu (local only)</h3>
       <div>
         <label>
           Breadcoins:
@@ -530,3 +572,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // Always create the cheat menu at startup, and sync cheat menu input values once
   if (cheatsEnabled) updateCheatMenu(true);
 });
+
+// -- Expose functions to window for onclick in HTML
+window.makeBreadcoin = makeBreadcoin;
+window.buyToaster = buyToaster;
+window.buyFactory = buyFactory;
+window.upgradeToasters = upgradeToasters;
+window.upgradeFactories = upgradeFactories;
+window.saveGame = saveGame;
+window.loadGame = loadGame;
+window.resetGame = resetGame;
+window.prestige = prestige;
+window.buyMarketing = buyMarketing;
+window.buyAdCampaign = buyAdCampaign;
+window.cheatSet = cheatSet;
+window.cheatAdd = cheatAdd;
+window.cheatAddAd = cheatAddAd;
+window.cheatPRDisaster = cheatPRDisaster;

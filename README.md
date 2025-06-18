@@ -40,6 +40,11 @@ Made with vanilla JavaScript and HTML.
 - `fav.ico` — Favicon (optional, can be replaced).
 - `README.md` — This file.
 
+## 🧑‍💻 Development & Customization
+
+- All gameplay is in `game.js` — tweak toasters, factories, marketing, or prestige formulas as you like.
+- The **cheat menu** is only enabled when running as a `file://` URL for safe local testing.
+
 ## 🙏 Credits
 
 - Developed by [cbx-nz](https://github.com/cbx-nz)
