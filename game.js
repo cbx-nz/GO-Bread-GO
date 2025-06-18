@@ -436,7 +436,7 @@ function updateCheatMenu(forceSyncInputs = false) {
     cheatDiv.className = "store";
     cheatDiv.id = "cheatDiv";
     cheatDiv.innerHTML = `
-      <h3>🕹️ Cheat Menu (local only)</h3>
+      <h3>🕹️ Cheat Menu</h3>
       <div>
         <label>
           Breadcoins:
