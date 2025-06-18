@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="fav.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A fun clicker game where you earn Breadcoins by making bread and upgrading your bakery.">
+  <title>🥖 Breadcoin Clicker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+      margin: 0;
+      padding: 20px;
+    }
+    h1, h2, h3 { margin-bottom: 10px; }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+    .box, .store, .stats-box, .log, .prestigeSection {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px 0;
+      background-color: #d2691e;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover { background-color: #b25619; }
+    #log {
+      max-height: 138px;
+      overflow-y: auto;
+      font-size: 0.9em;
+      background: #eee;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+    }
+    .header { text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🥖 Breadcoin Clicker</h1>
+    <h2>Breadcoins: <span id="breadcoins">0</span></h2>
+    <button onclick="makeBreadcoin()">Make Bread</button>
+  </div>
+  <div class="container">
+    <div>
+      <div class="store">
+        <h3>🛒 Shop</h3>
+        <button onclick="buyToaster()">Buy Toaster (Cost: <span id="toasterCost">10</span>)</button>
+        <p>Toasters: <span id="toasters">0</span></p>
+        <button onclick="buyFactory()">Buy Factory (Cost: <span id="factoryCost">100</span>)</button>
+        <p>Factories: <span id="factories">0</span></p>
+      </div>
+      <div class="store">
+        <h3>⬆️ Upgrades</h3>
+        <p>Toaster Lv <span id="toasterLevel">1</span> | Upgrade Cost: <span id="toasterUpgradeCost">100</span></p>
+        <button onclick="upgradeToasters()">Upgrade Toasters</button>
+        <p>Factory Lv <span id="factoryLevel">1</span> | Upgrade Cost: <span id="factoryUpgradeCost">500</span></p>
+        <button onclick="upgradeFactories()">Upgrade Factories</button>
+      </div>
+      <div class="store">
+        <h3>💾 Save / Load</h3>
+        <button onclick="saveGame()">Save</button>
+        <button onclick="loadGame()">Load</button>
+        <button onclick="resetGame()">Reset</button>
+      </div>
+      <div class="prestigeSection" id="prestigeSection">
+        <h3>🔥 Prestige</h3>
+        <p>Crumbs: <strong><span id="crumbs">0</span></strong></p>
+        <p>Production Multiplier: <strong><span id="prestigeMult">1.0x</span></strong></p>
+        <button onclick="prestige()">Prestige</button>
+      </div>
+      <h3>Marketing</h3>
+      <button onclick="buyMarketing()">Start Marketing Campaign (Cost: <span id="marketingCost">200</span>)</button>
+      <p>Marketing Level: <span id="marketingLevel">0</span></p>
+    </div>
+    <div>
+      <div class="stats-box">
+        <h3>📊 Stats</h3>
+        <p class="stat-row"><span>Current Breadcoins:</span><span id="statBreadcoins">0</span></p>
+        <p class="stat-row"><span>Per Second:</span><span id="statBPS">0</span></p>
+        <p class="stat-row"><span>Total Earned:</span><span id="statTotalEarned">0</span></p>
+        <p class="stat-row"><span>Clicks:</span><span id="statTotalClicks">0</span></p>
+        <p class="stat-row"><span>Toasters:</span><span id="statToasters">0</span> Lv <span id="statToasterLevel">1</span></p>
+        <p class="stat-row"><span>Factories:</span><span id="statFactories">0</span> Lv <span id="statFactoryLevel">1</span></p>
+        <p class="stat-row"><span>Customers:</span><span id="statCustomers">0</span></p>
+        <p class="stat-row"><span>Crumbs:</span><span id="statCrumbs">0</span></p>
+        <p class="stat-row"><span>Prestige Multiplier:</span><span id="statPrestigeMult">1.0x</span></p>
+        <p class="stat-row"><span>Marketing Level:</span><span id="statMarketingLevel">0</span></p>
+        <p class="stat-row"><span>Customer Demand Rate:</span><span id="statDemandRate">1.0</span></p>
+        <!-- New stats below -->
+        <p class="stat-row"><span>Ad Effect:</span><span id="statAdEffect">0</span></p>
+        <p class="stat-row"><span>PR Disaster:</span><span id="statPRDisaster">None</span></p>
+      </div>
+      <div class="log">
+        <h3>📜 Log</h3>
+        <div id="log"></div>
+      </div>
+      <div class="stats-box">
+        <p>Click the bread to earn Breadcoins!</p>
+        <p>Use the shop to buy upgrades and increase your production.</p>
+        <p>Prestige to reset your game and gain Crumbs for future runs.</p>
+        <p>Developed by cb𝑥 & Assistance of OpenAI ChatGPT</p>
+      </div>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
