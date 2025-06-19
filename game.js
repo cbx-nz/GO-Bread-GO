@@ -20,7 +20,7 @@ let customerBreadPrice = 1;
 let marketingLevel = 0;
 let marketingCost = 200;
 let marketingEffect = 0.5;
-const prestigeThreshold = 10000;
+const prestigeThreshold = 1000000;
 const logMax = 100;
 
 // Marketing Campaigns & Events
